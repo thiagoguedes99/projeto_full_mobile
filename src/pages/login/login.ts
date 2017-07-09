@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { LoginService } from "../../providers/login-service";
 
 /**
@@ -38,6 +38,7 @@ export class LoginPage {
   }
 
   alert(err: string) {
+    console.log('login componente');
     this.alertCtrl.create({
       title: 'Low battery',
     subTitle: '10% of battery remaining',

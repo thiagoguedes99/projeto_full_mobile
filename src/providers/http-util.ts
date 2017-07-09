@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ToastController } from "ionic-angular";
 
@@ -26,6 +25,8 @@ export class HttpUtil {
 	}
 
 	extrairDados(response: Response) {
+		  console.log('extrar dados');
+		  
 		  console.log(response);
 		
     	let data = response.json();
@@ -33,9 +34,13 @@ export class HttpUtil {
   	}
 
   	processarErros(erro: any) {
+		  console.log('processa eross');
+		  
 		  let data = erro.json();
+		  console.log(data);
+		  let msg = data.message;
 
-		  return data.message;
+		  return msg;
 		  
 	   //return Observable.throw('Erro acessando servidor remoto.');
 	}

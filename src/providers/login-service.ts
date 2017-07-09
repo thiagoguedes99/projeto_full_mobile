@@ -29,7 +29,7 @@ export class LoginService {
 
 		console.log('serviço');
 
-      return this.http.post(this.endPoint.USER_LOGIN_POST, body, this.httpUtil.headers())
+      return this.http.post(this.endPoint.USER_LOGIN_POST, body)// , this.httpUtil.headers()
 	                .map(this.httpUtil.extrairDados)
 	                .catch(this.httpUtil.processarErros);
   }
