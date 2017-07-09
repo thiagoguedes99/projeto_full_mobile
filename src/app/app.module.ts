@@ -11,12 +11,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpEndPoints } from "../providers/http-end-points";
 import { HttpUtil } from "../providers/http-util";
+import { LoginPage } from "../pages/login/login";
+import { Seccion } from "../providers/seccion";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -27,13 +30,15 @@ import { HttpUtil } from "../providers/http-util";
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HttpEndPoints,
     HttpUtil,
+    Seccion,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
