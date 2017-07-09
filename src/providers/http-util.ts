@@ -6,11 +6,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpUtil {
 
-  private API_URL: string = 'http://localhost:5000/api/';
+  /*private API_URL: string = 'http://localhost:5000/api/';
 
 	url(path: string) {
 		return this.API_URL + path;
-	}
+	}*/
 
 	headers() {
 		let headersParams = { 'Content-Type': 'application/json' };
@@ -28,6 +28,7 @@ export class HttpUtil {
   	}
 
   	processarErros(erro: any) {
+
 	    return Observable.throw('Erro acessando servidor remoto.');
 	}
 
