@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ToastController } from "ionic-angular";
+import { ToastController, AlertController } from "ionic-angular";
+import { Observable } from "rxjs/Observable";
+//import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class HttpUtil {
 
-  /*private API_URL: string = 'http://localhost:5000/api/';
+	constructor(public toastCtrl: ToastController, public alertCtrl: AlertController) {
 
-	url(path: string) {
-		return this.API_URL + path;
-	}*/
-
-	constructor(public toastCtrl: ToastController) {}
+	}
 
 	headers() {
 		let headersParams = { 'Content-Type': 'application/json' };
@@ -34,15 +34,13 @@ export class HttpUtil {
   	}
 
   	processarErros(erro: any) {
-		  console.log('processa eross');
-		  
-		  let data = erro.json();
-		  console.log(data);
-		  let msg = data.message;
+		 let body = JSON.parse(erro._body);
+        
+		this.alertCtrl.create({
+        title: 'Erro',
+        subTitle: body.message,
+        buttons: ['OK']
+    }).present();        
 
-		  return msg;
-		  
-	   //return Observable.throw('Erro acessando servidor remoto.');
 	}
-
 }

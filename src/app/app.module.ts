@@ -4,7 +4,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+//import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -12,12 +12,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpEndPoints } from "../providers/http-end-points";
 import { HttpUtil } from "../providers/http-util";
 import { LoginPage } from "../pages/login/login";
-import { Seccion } from "../providers/seccion";
+import { Message } from "../shared/message";
+import { IonicStorageModule } from '@ionic/storage';
+import { Seccion } from "../shared/seccion";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    //HomePage,
     ListPage,
     LoginPage
   ],
@@ -25,11 +27,12 @@ import { Seccion } from "../providers/seccion";
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    //HomePage,
     ListPage,
     LoginPage
   ],
@@ -39,6 +42,7 @@ import { Seccion } from "../providers/seccion";
     HttpEndPoints,
     HttpUtil,
     Seccion,
+    Message,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

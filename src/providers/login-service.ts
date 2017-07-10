@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { HttpUtil } from "./http-util";
 import { HttpEndPoints } from "./http-end-points";
+import { AlertController } from "ionic-angular";
 
 /*
   Generated class for the Service provider.
@@ -16,26 +17,18 @@ export class LoginService {
 
   //private deixar: boolean = true;
 
-  constructor(private http: Http, private endPoint: HttpEndPoints, private  httpUtil: HttpUtil) {
-    console.log('Hello Service Provider');
-  }
+  constructor(private http: Http, private endPoint: HttpEndPoints) {
+    
+   }
 
   logar(username: string, password: string) {
-    /*let params = JSON.stringify(
-			{ "username": 'usuario', "password": 'senha' });*/
       let body = new URLSearchParams();
-      body.append("username", username);
+
+      body.append("email", username);
       body.append("password", password);
 
-		console.log('serviço');
-
       return this.http.post(this.endPoint.USER_LOGIN_POST, body)// , this.httpUtil.headers()
-	                .map(this.httpUtil.extrairDados)
-	                .catch(this.httpUtil.processarErros);
+	                .map(res => res.json());
   }
-
-   /*get logado(): boolean {
-    return this.deixar;
-   }*/
 
 }
