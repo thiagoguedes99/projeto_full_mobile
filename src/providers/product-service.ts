@@ -1,3 +1,4 @@
+import { Product } from './../models/product';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -12,7 +13,7 @@ import { HttpEndPoints } from "./http-end-points";
 @Injectable()
 export class ProductService {
 
-  constructor(public http: Http, private endPoint: HttpEndPoints) {
+  constructor(private http: Http, private endPoint: HttpEndPoints) {
     console.log('Hello ProductService Provider');
   }
 
@@ -33,6 +34,20 @@ export class ProductService {
       //body.append("password", password);   // VERIFICAR CONEXÃO
 
       return this.http.get(this.endPoint.PRODUCTS_FIND_GET, body)// , this.httpUtil.headers()
+	                .map(res => res.json());
+  }
+
+  salvarProduto(produto: Product) {
+      //let body = JSON.stringify(produto);
+      let body = new URLSearchParams();
+
+      body.append("_id", produto._id);
+      body.append("name", produto.name);
+      body.append("description", produto.description);
+      body.append("price", produto.price);
+      body.append("image", produto.image);
+
+      return this.http.post(this.endPoint.PRODUCTS_SAVE_POST, produto)// , this.httpUtil.headers()
 	                .map(res => res.json());
   }
 

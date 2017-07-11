@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from "ionic-angular";
+import { LoadingController, Loading } from "ionic-angular";
 
 @Injectable()
 export class LoadingSevice {
 
-    public loading: any;
+    public loading: Loading;
 
 
-  constructor(private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public loadingCtrl: LoadingController) {
     console.log('Hello Seccion Provider');
   }
 
-  criarLoading() {
+  criarLoading(msg?: string) {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: msg
     });
     this.loading.present();
+
+  }
+
+  fecharLoading() {
+    this.loading.dismiss();
   }
 }

@@ -1,0 +1,48 @@
+<!--
+  Generated template for the FormProdutos page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{ titulo }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="productForm" (ngSubmit)="salvar()">
+        <ion-row>
+            <ion-col col-3>
+                <ion-thumbnail (click)="foto()" item-start>
+                    <img src="img/thumbnail-totoro.png">
+                </ion-thumbnail>
+            </ion-col>
+            <ion-col>
+                <ion-item item-end>
+                    <ion-input formControlName="name" type="text" placeholder="Name"></ion-input>
+                </ion-item>
+
+                <ion-item item-end>
+                    <ion-input formControlName="price" type="number" placeholder="Preço"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col cl-12>
+                <ion-item item-end>
+                    <ion-textarea formControlName="description" placeholder="Descrição"></ion-textarea>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <button type="submit" [disabled]="productForm.invalid" ion-button block color="secondary">
+                Salvar
+            </button>
+        <br>
+    </form>
+    {{erro}}
+</ion-content>

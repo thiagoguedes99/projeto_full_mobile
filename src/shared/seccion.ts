@@ -1,6 +1,5 @@
 import { UserSeccion } from './../models/user-seccion';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 
@@ -17,7 +16,7 @@ export class Seccion {
 
     private userLogado: boolean = false;
 
-  constructor(public http: Http, private storage: Storage) {
+  constructor(private storage: Storage) {
     console.log('Hello Seccion Provider');
   }
 
@@ -26,7 +25,7 @@ export class Seccion {
   }
 
   set token(token: string) {
-    this.storage.set('token', '');    
+    this.storage.set('token', '');  
   }
 
   salvarUser(user: UserSeccion) {

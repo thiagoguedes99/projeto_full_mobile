@@ -1,10 +1,10 @@
+import { LoadingSevice } from './../../shared/loading';
 import { Seccion } from './../../shared/seccion';
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
-import { LoginService } from "../../providers/login-service";
-import { Message } from "../../shared/message";
-import { HttpUtil } from "../../providers/http-util";
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UserSeccion } from "../../models/user-seccion";
+import { UserService } from "../../providers/UserService";
+import { HttpFailureUtil } from "../../providers/http-failure-util";
 
 /**
  * Generated class for the Login page.
@@ -15,18 +15,18 @@ import { UserSeccion } from "../../models/user-seccion";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [LoginService]
+  providers: [UserService, LoadingSevice]
 })
 export class LoginPage {
 
-  private loading: any;
+  //private loading: any;
 
   username: string = "";
   password: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-               public service: LoginService, private httpUtil: HttpUtil,
-               public loadingCtrl: LoadingController,
+               public service: UserService, private erroResponse: HttpFailureUtil,
+               public loadingCtrl: LoadingController, private loadingSevice: LoadingSevice,
                private seccion: Seccion) {
   }
 
@@ -34,34 +34,30 @@ export class LoginPage {
     console.log('ionViewDidLoad Login');
   }
 
-  fazerLogin() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Validando Email e Senha...'
-    }).present();
+  fazerLogin() {    
+    this.loadingSevice.criarLoading('conectando....');
 
     this.service.logar(this.username, this.password).subscribe(
       resp => this.logarUser(resp),
-      err => this.httpUtil.processarErros(err),
-      //()=> this.loading.dismiss()
+      err => {
+        this.loadingSevice.fecharLoading()
+        this.erroResponse.processarErros(err)
+      },
     );
   }
 
   logarUser(user: UserSeccion) {
     this.seccion.salvarUser(user);
-    this.loading.dismiss;
+    this.loadingSevice.fecharLoading();    
     this.goHomePage();
-    //this.loading.onDismiss(/*() => this.dismiss()*/);
-    //this.loading.dismiss().then(()=> this.goHomePage())
-                          //.catch(() => this.goHomePage());
   }
 
-  saveToken() {
-
+  /*saveToken() {
     this.seccion.token = "";
 
-  }
+  }*/
 
   goHomePage() {
-    this.navCtrl.push("Home");
+    this.navCtrl.setRoot("Home");
   }
 }

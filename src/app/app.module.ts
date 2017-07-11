@@ -4,23 +4,23 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-//import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpEndPoints } from "../providers/http-end-points";
-import { HttpUtil } from "../providers/http-util";
+//import { HttpUtil } from "../providers/http-util";
 import { LoginPage } from "../pages/login/login";
 import { Message } from "../shared/message";
 import { IonicStorageModule } from '@ionic/storage';
 import { Seccion } from "../shared/seccion";
+import { LoadingSevice } from "../shared/loading";
+import { ImagePicker } from '@ionic-native/image-picker';
+import { HttpFailureUtil } from "../providers/http-failure-util";
+
 
 @NgModule({
   declarations: [
     MyApp,
-    //HomePage,
-    ListPage,
     LoginPage
   ],
   imports: [
@@ -32,17 +32,17 @@ import { Seccion } from "../shared/seccion";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    //HomePage,
-    ListPage,
     LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     HttpEndPoints,
-    HttpUtil,
+    HttpFailureUtil,
     Seccion,
     Message,
+    LoadingSevice,
+    ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
