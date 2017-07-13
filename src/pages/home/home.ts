@@ -19,6 +19,8 @@ import { Product } from "../../models/product";
 })
 export class Home {
 
+  paginaAtual: number = 1;
+  qtdPagina: number = 5;
   qtdProdutos: number = 0;
   produtos: any[] = [];  // TODO: COLOCAR TIPAGEM  
 
@@ -47,10 +49,31 @@ export class Home {
   }
 
   listarProdutos(listaProdutos: any) {  //  MUDAR O TIPO DA VARIÁVEL
-    this.loadingService.fecharLoading();
+    //this.loadingService.fecharLoading();
 
     this.produtos = listaProdutos.products;    
-    this.qtdProdutos = Number(listaProdutos.total);   
+    this.qtdProdutos = Number(listaProdutos.total);
+  }
+
+  maisProdutos() {
+    this.paginaAtual ++;
+    this.paginar();  
+  }
+
+  menosProdutos() {
+    this.paginaAtual --;
+    this.paginar();
+  }
+
+  paginar() {
+    this.loadingService.criarLoading();
+
+    this.service.getProdutosPaginar(this.paginaAtual, this.qtdPagina).subscribe(
+      resp => this.listarProdutos(resp),
+      err => this.erroResponse.processarErros(err),
+    );
+
+    this.loadingService.fecharLoading();
   }
 
 }

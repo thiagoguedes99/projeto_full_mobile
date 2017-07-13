@@ -23,7 +23,10 @@ export class ProductService {
   }
 
   getProdutosPaginar(pagina: number, qtdProdutos: number) {
-    return this.http.get(`${this.endPoint.PRODUCTS_ALL_GET}/${pagina}/${qtdProdutos}`, this.endPoint.headers())// , this.httpUtil.headers()
+    console.log(pagina);
+    console.log(qtdProdutos);
+    let url = `${this.endPoint.PRODUCTS_ALL_GET}/${pagina}/${qtdProdutos}`;
+    return this.http.get(url, this.endPoint.headers())// , this.httpUtil.headers()
 	                .map(res => res.json());    
   }
 

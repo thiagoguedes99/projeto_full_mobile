@@ -32,4 +32,8 @@
         <button type="">Cadastrar</button>
     </div>
 
+    <button (click)="menosProdutos()" *ngIf="paginaAtual != 1" ion-button clear>menos</button>
+    <label for=""><strong>{{qtdProdutos}} produtos encontrados</strong></label>
+    <button (click)="maisProdutos()" *ngIf="produtos.length != 0" ion-button clear>mais</button>
+
 </ion-content>
