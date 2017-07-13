@@ -35,6 +35,7 @@ export class FormProdutos {
                 
                 if (this.navParams.get('item')) {
                   this.produto = this.navParams.get('item');
+                  this.titulo = 'Editar produto';
                 }
 
                 this.productForm = this.formBuilder.group({
