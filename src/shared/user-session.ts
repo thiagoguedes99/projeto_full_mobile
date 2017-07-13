@@ -17,7 +17,6 @@ export class UserSession {
     private userLogado: boolean = false;
 
   constructor(private storage: Storage) {
-    console.log('Hello Seccion Provider');
   }
 
   get logado(): boolean {

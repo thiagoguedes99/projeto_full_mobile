@@ -8,7 +8,6 @@ export class LoadingSevice {
 
 
   constructor(public loadingCtrl: LoadingController) {
-    console.log('Hello Seccion Provider');
   }
 
   criarLoading(msg?: string) {

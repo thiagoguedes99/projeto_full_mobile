@@ -14,7 +14,6 @@ import { HttpEndPoints } from "./http-end-points";
 export class ProductService {
 
   constructor(private http: Http, private endPoint: HttpEndPoints) {
-    console.log('Hello ProductService Provider');
   }
 
   todosProdutos() {
@@ -23,8 +22,6 @@ export class ProductService {
   }
 
   getProdutosPaginar(pagina: number, qtdProdutos: number) {
-    console.log(pagina);
-    console.log(qtdProdutos);
     let url = `${this.endPoint.PRODUCTS_ALL_GET}/${pagina}/${qtdProdutos}`;
     return this.http.get(url, this.endPoint.headers())// , this.httpUtil.headers()
 	                .map(res => res.json());    

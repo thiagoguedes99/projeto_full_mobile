@@ -7,7 +7,6 @@ export class Message {
 
 
   constructor(private alertCtrl: AlertController) {
-    console.log('Hello Seccion Provider');
   }
 
   enviarAlerta(err: string) {
