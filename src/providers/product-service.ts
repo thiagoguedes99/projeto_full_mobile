@@ -18,27 +18,25 @@ export class ProductService {
   }
 
   todosProdutos() {
-      //let body = new URLSearchParams();
-
-      //body.append("email", username);  // ARRUMAR O BODY
-      //body.append("password", password);
-
-      return this.http.get(this.endPoint.PRODUCTS_ALL_GET, this.endPoint.headers())// , this.httpUtil.headers()
+    return this.http.get(this.endPoint.PRODUCTS_ALL_GET, this.endPoint.headers())// , this.httpUtil.headers()
 	                .map(res => res.json());
+  }
+
+  getProdutosPaginar(pagina: number, qtdProdutos: number) {
+    return this.http.get(`${this.endPoint.PRODUCTS_ALL_GET}/${pagina}/${qtdProdutos}`, this.endPoint.headers())// , this.httpUtil.headers()
+	                .map(res => res.json());    
   }
 
   produtoID(id: string) {
       let body = new URLSearchParams();
 
       body.append("id", id);
-      //body.append("password", password);   // VERIFICAR CONEXÃO
 
       return this.http.get(this.endPoint.PRODUCTS_FIND_GET, body)// , this.httpUtil.headers()
 	                .map(res => res.json());
   }
 
   salvarProduto(produto: Product) {
-      //let body = JSON.stringify(produto);
       let body = new URLSearchParams();
 
       body.append("_id", produto._id);
@@ -65,7 +63,6 @@ export class ProductService {
       let body = new URLSearchParams();
 
       body.append("email", id);
-      //body.append("password", password);
 
       return this.http.delete(this.endPoint.PRODUCTS_DELETE, body)// , this.httpUtil.headers()
 	                .map(res => res.json());
