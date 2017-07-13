@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Headers, RequestOptions } from '@angular/http';
-import { Seccion } from "../shared/seccion";
+import { Headers } from '@angular/http';
+import { UserSession } from "../shared/user-session";
 
 
 @Injectable()
 export class HttpEndPoints {
 
-  constructor(private userSeccion: Seccion) { }
+  constructor(private userSession: UserSession) { }
 
   	headers() {
-		let headersParams = { 'Content-Type': 'application/json' };
+		/*let headersParams = { 'Content-Type': 'application/json' };
 		//if (localStorage['token']) {
 			headersParams['Authorization'] = localStorage['token'];
 		//}
 		let headers = new Headers(headersParams);
     	let options = new RequestOptions({ headers: headers });
-    	return options;
-	}
+    	return options;*/
+
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': this.userSession.token       
+      });
+    }
 
   private API_URL: string = 'http://localhost:5000/api/';
 

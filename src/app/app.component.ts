@@ -1,11 +1,10 @@
+import { UserSession } from './../shared/user-session';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-//import { HomePage } from '../pages/home/home';
 import { LoginPage } from "../pages/login/login";
-import { Seccion } from "../shared/seccion";
 
 @Component({
   templateUrl: 'app.html',
@@ -18,7 +17,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, 
-              public splashScreen: SplashScreen, public seccion: Seccion) {
+              public splashScreen: SplashScreen, public serSession: UserSession) {
 
     this.initializeApp();
 

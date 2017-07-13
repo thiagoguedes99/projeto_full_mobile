@@ -1,10 +1,12 @@
+import { Routers } from './../../shared/router';
 import { LoadingSevice } from './../../shared/loading';
-import { Seccion } from './../../shared/seccion';
+//import { Seccion } from './../../shared/seccion';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UserSeccion } from "../../models/user-seccion";
 import { UserService } from "../../providers/UserService";
 import { HttpFailureUtil } from "../../providers/http-failure-util";
+import { UserSession } from "../../shared/user-session";
 
 /**
  * Generated class for the Login page.
@@ -20,14 +22,14 @@ import { HttpFailureUtil } from "../../providers/http-failure-util";
 export class LoginPage {
 
   //private loading: any;
-
+url: any;
   username: string = "";
   password: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
                public service: UserService, private erroResponse: HttpFailureUtil,
                public loadingCtrl: LoadingController, private loadingSevice: LoadingSevice,
-               private seccion: Seccion) {
+               private userSession: UserSession) {
   }
 
   ionViewDidLoad() {
@@ -47,17 +49,36 @@ export class LoginPage {
   }
 
   logarUser(user: UserSeccion) {
-    this.seccion.salvarUser(user);
+    this.userSession.salvarUser(user);
     this.loadingSevice.fecharLoading();    
     this.goHomePage();
   }
 
-  /*saveToken() {
-    this.seccion.token = "";
-
-  }*/
+  goToFormUser() {
+    this.navCtrl.push("FormUser");
+  }
 
   goHomePage() {
     this.navCtrl.setRoot("Home");
   }
+
+  readUrl(event) {
+  /*if (event.target.files && event.target.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = (event) => {
+      this.url = event.target.
+    }
+
+    reader.readAsDataURL(event.target.files[0]);
+  }*/
+console.log('aq');
+  console.log(event);
+  console.log(event.target.files);
+  //this.url = event.target.files[0];
+  this.url = event.target.value;
+  console.log(event.target);
+  //this.url = event.target.files[0];
+  
+}
 }

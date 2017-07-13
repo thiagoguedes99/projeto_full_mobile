@@ -32,6 +32,10 @@ export class FormProdutos {
               private service: ProductService, private message: Message,
               private erroResponse: HttpFailureUtil, private loadingSevice: LoadingSevice,
               private formBuilder: FormBuilder, private imagePicker: ImagePicker) {
+                
+                if (this.navParams.get('item')) {
+                  this.produto = this.navParams.get('item');
+                }
 
                 this.productForm = this.formBuilder.group({
                   _id: [this.produto._id],
@@ -39,49 +43,55 @@ export class FormProdutos {
                   description: [this.produto.description],
                   price: [this.produto.price, Validators.required],
                   image: [this.produto.image]
-                });  
+                });
                 
-              }
+                }
 
   ionViewDidLoad() {
-    this.id = this.navParams.get("id");
-    if (this.id) {
-      this.titulo = 'Editar produto'
-      this.loadingSevice.criarLoading('Carregando Produto...');            
+    /*if (this.navParams.get('item')) {
+      
+    this.produto = this.navParams.get('item');
+    }
+
+    if (this.produto._id) {
+      this.titulo = 'Editar produto';
+    }*/
+
+  }
+         // SERVE PARA FAZER UMA CHAMADA PELO ID DO PRODUTO       
+      /*
+      this.loadingSevice.criarLoading('Carregando Produto...');  
       this.service.produtoID(this.id).subscribe(
           resp => this.produto = resp,
           err => {
             this.loadingSevice.fecharLoading()
             this.erroResponse.processarErros(err)
           },
-          );
-        }
-                
-  }
+        );
+      */
 
   salvar() {
     this.loadingSevice.criarLoading();
 
     if (this.produto._id) {
       this.service.editarProduto(this.produto._id, this.productForm.value).subscribe(
-        resp => this.message.enviarAlerta(resp.message),
-        err => {
-        this.loadingSevice.fecharLoading()
-        this.erroResponse.processarErros(err)
-      },
+        resp => {
+          this.message.enviarAlerta(resp.message);
+          this.productForm.reset();
+        },
+        err => this.erroResponse.processarErros(err)
     );
   } else {
       this.service.salvarProduto(this.productForm.value).subscribe(
         resp => {
-          this.message.enviarAlerta(resp.message),
-          this.loadingSevice.fecharLoading()
+          this.message.enviarAlerta(resp.message);
+          this.productForm.reset();
         },
-        err => {
-          this.loadingSevice.fecharLoading()
-          this.erroResponse.processarErros(err)
-        },
+        err => this.erroResponse.processarErros(err)
       );
     }
+
+    this.loadingSevice.fecharLoading()    
   }
 
   foto() {

@@ -17,7 +17,7 @@
 <ion-content padding>
 
     <ion-list *ngIf="qtdProdutos > 0">
-        <ion-item *ngFor="let item of produtos">
+        <ion-item *ngFor="let item of produtos" (click)="goToFormProduto(item)">
             <ion-thumbnail item-start>
                 <img src="{{item.image}}">
             </ion-thumbnail>

@@ -46,41 +46,43 @@ export class FormUser {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FormUser');
     this.id = this.navParams.get("id");
+    
     if (this.id) {
-      this.titulo = 'Editar usuário'
+      this.titulo = 'Editar usuário';
       this.loadingSevice.criarLoading('Carregando Usuário...');            
+     
       this.service.buscarUserID(this.id).subscribe(
           resp => this.user = resp,
           err => {
             this.loadingSevice.fecharLoading()
             this.erroResponse.processarErros(err)
           },
-          );
-        }
+      );
+    }
   }
 
   salvar() {
-    this.loadingSevice.criarLoading();
+    this.loadingSevice.criarLoading('loadin');
 
     if (this.user._id) {
       this.service.editarUser(this.user._id, this.user).subscribe(
-        resp => this.message.enviarAlerta(resp.message),
-        err => {
-        this.loadingSevice.fecharLoading()
-        this.erroResponse.processarErros(err)
-      },
-    );
-  } else { 
-      this.service.salvarUser(this.userForm.value).subscribe(
-        resp => this.message.enviarAlerta(resp.message),
-        err => {
-          this.loadingSevice.fecharLoading()
-          this.erroResponse.processarErros(err)
+        resp => {
+          this.message.enviarAlerta(resp.message)
+          this.userForm.reset();
         },
+        err => this.erroResponse.processarErros(err)
       );
-    }
+    } else { 
+        this.service.salvarUser(this.userForm.value).subscribe(
+          resp => {
+            this.message.enviarAlerta(resp.message);
+            this.userForm.reset();            
+          },         
+          err => this.erroResponse.processarErros(err)
+        );
+      }
+    this.loadingSevice.fecharLoading();
   }
 
   foto() {

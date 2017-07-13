@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
   for more info on providers and Angular DI.
 */
 @Injectable()
-export class Seccion {
+export class UserSession {
 
     private userLogado: boolean = false;
 
@@ -22,6 +22,15 @@ export class Seccion {
 
   get logado(): boolean {
     return this.userLogado;
+  }
+
+  get token() {
+    this.storage.get('token').then(token => {
+      if (token) {
+        return token;
+      }
+    });
+    return null;
   }
 
   set token(token: string) {

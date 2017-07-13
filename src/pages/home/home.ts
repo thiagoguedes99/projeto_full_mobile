@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProductService } from "../../providers/product-service";
 import { LoadingSevice } from "../../shared/loading";
 import { HttpFailureUtil } from "../../providers/http-failure-util";
+import { Product } from "../../models/product";
 
 /**
  * Generated class for the Home page.
@@ -27,9 +28,12 @@ export class Home {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Home');
     this.loadingService.criarLoading();
     this.getTodosProdutos();
+  }
+
+  goToFormProduto(item: Product) {
+    this.navCtrl.push('FormProdutos', {'item': item});
   }
 
   getTodosProdutos() {

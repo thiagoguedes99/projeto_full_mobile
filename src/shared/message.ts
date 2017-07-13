@@ -11,9 +11,6 @@ export class Message {
   }
 
   enviarAlerta(err: string) {
-    alert('foi aquijjjjaaaaa');
-    console.log('login componente');
-    
     this.alertCtrl.create({
         title: 'Low battery',
         subTitle: err,

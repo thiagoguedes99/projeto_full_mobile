@@ -8,14 +8,14 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpEndPoints } from "../providers/http-end-points";
-//import { HttpUtil } from "../providers/http-util";
 import { LoginPage } from "../pages/login/login";
 import { Message } from "../shared/message";
 import { IonicStorageModule } from '@ionic/storage';
-import { Seccion } from "../shared/seccion";
 import { LoadingSevice } from "../shared/loading";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { HttpFailureUtil } from "../providers/http-failure-util";
+import { UserService } from "../providers/UserService";
+import { UserSession } from "../shared/user-session";
 
 
 @NgModule({
@@ -39,10 +39,11 @@ import { HttpFailureUtil } from "../providers/http-failure-util";
     SplashScreen,
     HttpEndPoints,
     HttpFailureUtil,
-    Seccion,
+    UserService,
     Message,
     LoadingSevice,
     ImagePicker,
+    UserSession,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
