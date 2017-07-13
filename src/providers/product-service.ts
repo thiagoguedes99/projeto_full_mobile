@@ -23,7 +23,7 @@ export class ProductService {
       //body.append("email", username);  // ARRUMAR O BODY
       //body.append("password", password);
 
-      return this.http.get(this.endPoint.PRODUCTS_ALL_GET)// , this.httpUtil.headers()
+      return this.http.get(this.endPoint.PRODUCTS_ALL_GET, this.endPoint.headers())// , this.httpUtil.headers()
 	                .map(res => res.json());
   }
 

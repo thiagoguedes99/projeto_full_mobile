@@ -26,7 +26,7 @@ export class UserService {
       body.append("email", username);
       body.append("password", password);
 
-      return this.http.post(this.endPoint.USER_LOGIN_POST, body)// , this.httpUtil.headers()
+      return this.http.post(this.endPoint.USER_LOGIN_POST, body,this.endPoint.headers())// , this.httpUtil.headers()
 	                .map(res => res.json());
   }
 

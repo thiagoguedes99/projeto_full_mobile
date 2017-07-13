@@ -8,7 +8,7 @@ export class HttpEndPoints {
 
   constructor(private userSession: UserSession) { }
 
-  	headers() {
+  	headers(): Headers {
 		/*let headersParams = { 'Content-Type': 'application/json' };
 		//if (localStorage['token']) {
 			headersParams['Authorization'] = localStorage['token'];
@@ -21,6 +21,8 @@ export class HttpEndPoints {
         'Content-Type': 'application/json',
         'Authorization': this.userSession.token       
       });
+
+      return headers;
     }
 
   private API_URL: string = 'http://localhost:5000/api/';

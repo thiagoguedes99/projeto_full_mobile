@@ -28,7 +28,6 @@ export class Home {
   }
 
   ionViewDidLoad() {
-    this.loadingService.criarLoading();
     this.getTodosProdutos();
   }
 
@@ -37,10 +36,14 @@ export class Home {
   }
 
   getTodosProdutos() {
+    this.loadingService.criarLoading();
+
     this.service.todosProdutos().subscribe(
       resp => this.listarProdutos(resp),
       err => this.erroResponse.processarErros(err),
     );
+    
+    this.loadingService.fecharLoading();
   }
 
   listarProdutos(listaProdutos: any) {  //  MUDAR O TIPO DA VARIÁVEL
