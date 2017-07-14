@@ -19,7 +19,7 @@ export class HttpEndPoints {
 
       let headers = new Headers({
         'Content-Type': 'application/json',
-        'Authorization': this.userSession.token       
+        'Authorization': this.userSession.userToken    
       });
 
       return headers;

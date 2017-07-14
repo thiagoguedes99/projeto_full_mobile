@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   todosProdutos() {
-    return this.http.get(this.endPoint.PRODUCTS_ALL_GET, this.endPoint.headers())// , this.httpUtil.headers()
+    return this.http.get(this.endPoint.PRODUCTS_ALL_GET,{headers: this.endPoint.headers()})// , this.httpUtil.headers()
 	                .map(res => res.json());
   }
 
