@@ -9,14 +9,6 @@ export class HttpEndPoints {
   constructor(private userSession: UserSession) { }
 
   	headers(): Headers {
-		/*let headersParams = { 'Content-Type': 'application/json' };
-		//if (localStorage['token']) {
-			headersParams['Authorization'] = localStorage['token'];
-		//}
-		let headers = new Headers(headersParams);
-    	let options = new RequestOptions({ headers: headers });
-    	return options;*/
-
       let headers = new Headers({
         'Content-Type': 'application/json',
         'Authorization': this.userSession.userToken    

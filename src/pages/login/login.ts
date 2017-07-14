@@ -62,23 +62,4 @@ url: any;
     this.navCtrl.setRoot("Home");
   }
 
-  readUrl(event) {
-  /*if (event.target.files && event.target.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = (event) => {
-      this.url = event.target.
-    }
-
-    reader.readAsDataURL(event.target.files[0]);
-  }*/
-console.log('aq');
-  console.log(event);
-  console.log(event.target.files);
-  //this.url = event.target.files[0];
-  this.url = event.target.value;
-  console.log(event.target);
-  //this.url = event.target.files[0];
-  
-}
 }
